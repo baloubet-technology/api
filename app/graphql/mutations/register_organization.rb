@@ -1,15 +1,13 @@
 module Mutations
   class RegisterOrganization < Mutations::BaseMutation
-    argument :email, String, required: true
     argument :name, String, required: true
     argument :country, String, required: true
-
     argument :country_code, String, required: true
-
     argument :city, String, required: true
     argument :line1, String, required: true
     argument :postal_code, String, required: true
     argument :state, String, required: true
+    argument :email, String, required: true
     argument :phone, String, required: true
     argument :tax_id, String, required: true
     argument :vat_id, String, required: true
@@ -17,34 +15,32 @@ module Mutations
     argument :business_description, String, required: true
     argument :organization_url, String, required: true
 
-    argument :mcc_id, Integer, required: true
-
     argument :bank_account_country, String, required: true
     argument :bank_account_currency, String, required: true
-
     argument :bank_account_holder_name, String, required: true
     argument :bank_account_number, String, required: true
 
     argument :person_first_name, String, required: true
     argument :person_last_name, String, required: true
-    argument :person_email, String, required: true
+    argument :person_gender, String, required: true
     argument :person_bd, String, required: true
     argument :person_bm, String, required: true
     argument :person_by, String, required: true
     argument :person_city, String, required: true
-    argument :person_country, String, required: true
-    argument :person_country_code, String, required: true
     argument :person_line1, String, required: true
     argument :person_postal_code, String, required: true
     argument :person_state, String, required: true
-    argument :person_gender, String, required: true
-    argument :percent_ownership, String, required: true
-    argument :password, String, required: true
-
+    argument :person_country, String, required: true
+    argument :person_country_code, String, required: true
     argument :director, Boolean, required: false
     argument :executive, Boolean, required: false
     argument :owner, Boolean, required: false
     argument :representative, Boolean, required: false
+    argument :percent_ownership, String, required: true
+    argument :person_email, String, required: true
+    argument :password, String, required: true
+
+    argument :mcc_id, Integer, required: true
 
     field :member, Types::MemberType, null: false
 
@@ -156,6 +152,8 @@ module Mutations
         },
       )
 
+      rate = Rate.find_by(country: args[:country_code])
+
       organization = Organization.create!(
         email: args[:email],
         name: args[:name],
@@ -173,11 +171,10 @@ module Mutations
         business_description: args[:business_description],
         organization_url: args[:organization_url],
         fees: 10.0,
+        currency: args[:bank_account_currency],
         mcc_id: args[:mcc_id],
-        currency: args[:bank_account_currency]
+        rate_id: rate.id
       )
-
-      AddRateToOrganizationWorker.perform_async(organization.id)
 
       member = Member.create!(
         first_name: args[:person_first_name],
