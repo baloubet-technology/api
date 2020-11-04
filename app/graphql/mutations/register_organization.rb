@@ -152,7 +152,7 @@ module Mutations
         },
       )
 
-      rate = Rate.find_by(country: args[:country_code])
+      rate = Rate.find_by(country_code: args[:country_code])
 
       organization = Organization.create!(
         email: args[:email],
