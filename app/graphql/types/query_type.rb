@@ -1,13 +1,13 @@
 module Types
   class QueryType < Types::BaseObject
 
-    field :brands, [Types::BrandType], null: false
+    field :all_brands, [Types::BrandType], null: false
 
     field :categories, [Types::CategoryType], null: false
 
-    field :tags, [Types::TagType], null: false
+    field :all_tags, [Types::TagType], null: false
 
-    field :packages, [Types::PackageType], null: false
+    field :all_packages, [Types::PackageType], null: false
 
     field :softwares, [Types::SoftwareType], null: false
 
