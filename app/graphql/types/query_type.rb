@@ -96,7 +96,7 @@ module Types
     ############################################################################
 
 
-    def brands
+    def all_brands
       Brand.all
     end
 
@@ -104,11 +104,11 @@ module Types
       Category.all
     end
 
-    def tags
+    def all_tags
       Tag.all
     end
 
-    def packages
+    def all_packages
       Package.all
     end
 
