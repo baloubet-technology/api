@@ -19,7 +19,7 @@ module Mutations
           name: args[:name],
           type: 'good',
           active: true,
-          description: args[:description],
+          description: args[:description]
         })
 
         product = Product.create!(
