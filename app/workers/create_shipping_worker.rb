@@ -98,8 +98,6 @@ class CreateShippingWorker
     shipping_price_cents = (order.variant.product.package.price_cents * order.quantity).to_i
     shipping_price = shipping_price_cents / 100
 
-    rate_product = select_rate_product(order_id)
-
     order.update(
       fees: order.organization.fees,
       status: status,
@@ -111,7 +109,6 @@ class CreateShippingWorker
       tracker_id: shipment.tracker.id,
       order_url: "https://api.baloubet.com/orders/#{shipment.tracker.id}.pdf",
       order_status: true,
-      rate_product: rate_product,
       rate_organization: order.organization.rate.rate_fees
     )
 
