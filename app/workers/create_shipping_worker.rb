@@ -109,7 +109,7 @@ class CreateShippingWorker
       tracker_id: shipment.tracker.id,
       order_url: "https://api.baloubet.com/orders/#{shipment.tracker.id}.pdf",
       order_status: true,
-      rate_organization: order.organization.rate.rate_fees
+      rate_organization: order.organization.rate.R000
     )
 
     variant = order.variant.quantity - order.quantity
