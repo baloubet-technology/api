@@ -5,8 +5,6 @@ class CreateShippingWorker
   def perform(order_id)
     order = Order.find(order_id)
 
-    SelectRateProduct.perform_async(order_id)
-
     to_address = EasyPost::Address.create(
       :name => order.payment.name,
       :street1 => order.payment.line1,

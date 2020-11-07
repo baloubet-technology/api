@@ -48,6 +48,7 @@ class PaymentsController < ApplicationController
           case o.order_status
           when false
             CreateShippingWorker.perform_async(o.id)
+            SelectRateProduct.perform_async(o.id)
           end
         end
 
