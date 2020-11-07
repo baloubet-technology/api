@@ -1,4 +1,4 @@
-class SelectRateProduct
+class SelectRateProductWorker
   include Sidekiq::Worker
   sidekiq_options queue: :default, retry: 1
 
