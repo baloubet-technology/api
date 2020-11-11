@@ -29,6 +29,10 @@ module Types
 
     field :all_connects, [Types::ConnectType], null: false
 
+    field :all_transfers, [Types::TransferType], null: false
+
+    field :all_refunds, [Types::RefundType], null: false
+
     ############################################################################
 
     field :productId, Types::ProductType, null: false do
@@ -44,6 +48,14 @@ module Types
     end
 
     field :connectId, Types::ConnectType, null: false do
+      argument :id, ID, required: true
+    end
+
+    field :transferId, Types::TransferType, null: false do
+      argument :id, ID, required: true
+    end
+
+    field :refundId, Types::RefundType, null: false do
       argument :id, ID, required: true
     end
 
@@ -153,6 +165,16 @@ module Types
       connect = Connect.where(organization_id: member.organization_id)
     end
 
+    def all_transfers
+      member = context[:current_member]
+      transfer = Transfer.where(organization_id: member.organization_id)
+    end
+
+    def all_refunds
+      member = context[:current_member]
+      refund = Refund.where(organization_id: member.organization_id)
+    end
+
     ############################################################################
 
     def productId(args)
@@ -194,6 +216,28 @@ module Types
 
       if connect.organization_id == member.organization_id
         return connect
+      else
+        GraphQL::ExecutionError.new("Not authorize")
+      end
+    end
+
+    def transferId(args)
+      transfer = Transfer.find(args[:id])
+      member = context[:current_member]
+
+      if transfer.organization_id == member.organization_id
+        return transfer
+      else
+        GraphQL::ExecutionError.new("Not authorize")
+      end
+    end
+
+    def refundId(args)
+      refund = Refund.find(args[:id])
+      member = context[:current_member]
+
+      if refund.organization_id == member.organization_id
+        return refund
       else
         GraphQL::ExecutionError.new("Not authorize")
       end
