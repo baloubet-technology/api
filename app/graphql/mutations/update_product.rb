@@ -21,7 +21,7 @@ module Mutations
         when member.organization_id
 
           Stripe::Product.update(
-            product.product_stripe,
+            product.stripe_product,
             name: args[:name],
             description: args[:description],
           )
