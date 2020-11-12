@@ -26,7 +26,7 @@ module Mutations
             description: args[:description],
           )
 
-          product.update(
+          product.update!(
             name: args[:name],
             description: args[:description],
             brand_id: args[:brand_id],
