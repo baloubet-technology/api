@@ -4,6 +4,7 @@ module Mutations
     argument :price, Float, required: true
     argument :size, String, required: false
     argument :color, String, required: false
+    argument :picture_url, String, required: false
     argument :product_id, Integer, required: true
 
     field :variant, Types::VariantType, null: true
@@ -30,8 +31,6 @@ module Mutations
             product: product.stripe_product,
           })
 
-          # Cloudinary::Uploader.upload(@variants.photo_upload, :public_id => stripe_sku.id)
-
           variant = Variant.create(
             sku: stripe_sku.id,
             quantity: args[:quantity],
@@ -39,7 +38,7 @@ module Mutations
             price_cents: (args[:price] * 100).to_i,
             size: args[:size],
             color: args[:color],
-            picture_url: "https://res.cloudinary.com/baloubet/image/upload/v1590084125/#{stripe_sku.id}.png",
+            picture_url: args[:picture_url],
             product_id: args[:product_id],
             organization_id: member.organization_id
           )
