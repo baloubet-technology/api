@@ -8,7 +8,7 @@ class Variant < ApplicationRecord
   validates :sku, uniqueness: true, presence: true
   validates :price, presence: true
   validates :price_cents, presence: true
-  validates :picture_url, uniqueness: true
+  validates :picture_url, uniqueness: true, presence: true
 
   validates :product_id, presence: true
   validates :organization_id, presence: true
