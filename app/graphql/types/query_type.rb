@@ -109,7 +109,8 @@ module Types
 
 
     def all_brands
-      Brand.all
+      brand = Brand.all
+      brand.sort_by!
     end
 
     def categories
