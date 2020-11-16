@@ -110,7 +110,7 @@ module Types
 
     def all_brands
       brand = Brand.all
-      brand.sort_by!
+      brand.sort_by { |h| h[:name] }
     end
 
     def categories
