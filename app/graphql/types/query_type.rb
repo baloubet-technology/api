@@ -118,7 +118,8 @@ module Types
     end
 
     def all_tags
-      Tag.all
+      tag = Tag.all
+      tag.sort_by { |h| h[:name] }
     end
 
     def all_packages
