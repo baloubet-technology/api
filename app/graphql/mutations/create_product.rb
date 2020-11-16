@@ -48,7 +48,7 @@ module Mutations
           product: stripe_product.id,
         })
 
-        cloudinary = Cloudinary::Uploader.upload(args[:picture_url])
+        Cloudinary::Uploader.upload(args[:picture_url], :public_id => stripe_sku.id)
 
         variant = Variant.create(
           sku: stripe_sku.id,
@@ -57,7 +57,7 @@ module Mutations
           price_cents: (args[:price] * 100).to_i,
           size: args[:size],
           color: args[:color],
-          picture_url: cloudinary.secure_url,
+          picture_url: "https://res.cloudinary.com/baloubet/image/upload/v1590084125/#{stripe_sku.id}.png",
           product_id: product.id,
           organization_id: member.organization_id
         )
