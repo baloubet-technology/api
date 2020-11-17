@@ -71,6 +71,8 @@ module Mutations
         }
       })
 
+      amount = args[:amount_cents].to_f / 100
+
       payment = Payment.create(
         name: args[:name],
         email: args[:email],
@@ -81,7 +83,7 @@ module Mutations
         state: args[:state],
         country: args[:country],
         country_code: args[:country_code],
-        amount: (args[:amount_cents] / 100),
+        amount: amount,
         amount_cents: args[:amount_cents],
         charge: stripe_charge.id,
         payment_url: "https://api.baloubet.com/payments/#{stripe_charge.id}.pdf"
