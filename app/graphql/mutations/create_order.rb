@@ -13,7 +13,7 @@ module Mutations
       case variant.status
       when 'Live'
         price_cents = (variant.price_cents * args[:quantity]).to_i
-        price = price_cents / 100
+        price = price_cents.to_f / 100
 
         order = Order.create(
           quantity: args[:quantity],

@@ -96,7 +96,7 @@ class CreateShippingWorker
     end
 
     shipping_price_cents = (order.variant.product.package.price_cents * order.quantity).to_i
-    shipping_price = shipping_price_cents / 100
+    shipping_price = shipping_price_cents.to_f / 100
 
     order.update(
       fees: order.organization.fees,
