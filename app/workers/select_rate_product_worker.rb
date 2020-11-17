@@ -5,7 +5,7 @@ class SelectRateProductWorker
   def perform(order_id)
     order = Order.find(order_id)
 
-    rate = order.organization.rate
+    rate = Rate.find(order.organization.rate_id)
 
     result = rate.fetch(order.variant.product.tag.rate_code)
 
