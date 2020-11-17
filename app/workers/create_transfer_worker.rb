@@ -27,7 +27,7 @@ class CreateTransferWorker
         fees: fees,
         stripe_transfer: stripe_transfer.id,
         organization_id: order.organization_id,
-        order_id: order.id
+        order_id: order_id
       )
     else
       fail 'The transfer could not be completed'
