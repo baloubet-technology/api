@@ -7,7 +7,7 @@ class SelectRateProductWorker
 
     rate = order.organization.rate
 
-    result = rate.fetch(order.variant.product.tag.vat_code)
+    result = rate.fetch(order.variant.product.tag.rate_code)
 
     order.update(
       rate_product: result
