@@ -258,11 +258,11 @@ module Types
 
 
     def product(args)
-      Product.where(status: 'Live', id: args[:id])
+      Product.find(args[:id])
     end
 
     def variant(args)
-      Variant.where(status: 'Live', id: args[:id])
+      Variant.find(args[:id])
     end
 
     def tag(args)
