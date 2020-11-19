@@ -45,10 +45,16 @@ module Mutations
             type: 'finite',
             quantity: args[:quantity]
           },
-          product: stripe_product.id,
+          product: stripe_product.id
         })
 
-        Cloudinary::Uploader.upload(args[:picture_url], :public_id => stripe_sku.id)
+        Cloudinary::Uploader.upload(
+          args[:picture_url],
+          :public_id => stripe_sku.id,
+          :width => 454,
+          :height => 570,
+          :crop => 'scale'
+        )
 
         variant = Variant.create(
           sku: stripe_sku.id,
