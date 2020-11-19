@@ -99,14 +99,22 @@ module Types
       argument :charge, String, required: true
     end
 
+    field :search_product_brand_tag, [Types::ProductType], null: false do
+      argument :brand_id, ID, required: true
+      argument :tag_id, ID, required: true
+    end
+
     ############################################################################
 
     def search_payment(args)
       Payment.find_by(charge: args[:charge])
     end
 
-    ############################################################################
+    def search_product_brand_tag(args)
+      Product.where(brand_id: args[:brand_id], tag_id: args[:tag_id])
+    end
 
+    ############################################################################
 
     def all_brands
       brand = Brand.all
