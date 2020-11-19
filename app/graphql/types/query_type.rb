@@ -3,7 +3,7 @@ module Types
 
     field :all_brands, [Types::BrandType], null: false
 
-    field :categories, [Types::CategoryType], null: false
+    field :all_categories, [Types::CategoryType], null: false
 
     field :all_tags, [Types::TagType], null: false
 
@@ -113,8 +113,9 @@ module Types
       brand.sort_by { |h| h[:name] }
     end
 
-    def categories
-      Category.all
+    def all_categories
+      category = Category.all
+      category.sort_by { |h| h[:name] }
     end
 
     def all_tags
