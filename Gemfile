@@ -38,7 +38,7 @@ gem 'rack-cors'
 gem 'easypost'
 gem 'sidekiq'
 gem 'httparty'
-gem 'baloubet-auth-token', git: 'https://hugo-mori:7uaCxhVXuieyR6rgCMWuA6dgbjDGRksFRCNVPxQN@github.com/baloubet-technology/baloubet-auth-token.git'
+gem 'baloubet-auth-token', git: 'https://baloubette:q|m*<~{E{4:4R<cLk6M3{=L3(ht5@github.com/baloubet-technology/baloubet-auth-token.git'
 
 group :development, :test do
   gem 'dotenv-rails'
