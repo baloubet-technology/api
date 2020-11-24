@@ -56,9 +56,10 @@ module Mutations
           :crop => 'scale'
         )
 
-        product_algolia = Algolia::index.new('products')
+        client = Algolia::Search::Client.create(ENV['APPLICATION_ID'], ENV['API_KEY'])
+        product_algolia = client.init_index('products')
 
-        product_algolia.add_objects({
+        product_algolia.save_objects([
           id: product.id,
           name: product.name,
           description: product.description,
@@ -67,7 +68,7 @@ module Mutations
           category: product.tag.category.name,
           organization: product.organization.business_name,
           picture: "https://res.cloudinary.com/baloubet/image/upload/v1590084125/#{stripe_sku.id}.png"
-        })
+        ])
 
         variant = Variant.create(
           sku: stripe_sku.id,
