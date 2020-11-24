@@ -59,7 +59,7 @@ module Mutations
         client = Algolia::Search::Client.create('OQKR7DERMO', '0eedeab36e64fe27bb9aa0c4e1e6de58')
         product_algolia = client.init_index('products')
 
-        product_algolia.save_objects({
+        product_algolia.save_objects([
           objectID: product.id,
           name: product.name,
           description: product.description,
@@ -68,7 +68,7 @@ module Mutations
           category: product.tag.category.name,
           organization: product.organization.business_name,
           picture: "https://res.cloudinary.com/baloubet/image/upload/v1590084125/#{stripe_sku.id}.png"
-        })
+        ])
 
         variant = Variant.create(
           sku: stripe_sku.id,
