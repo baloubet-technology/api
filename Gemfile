@@ -39,7 +39,7 @@ gem 'easypost'
 gem 'sidekiq'
 gem 'httparty'
 gem 'baloubet-auth-token', git: 'https://baloubette:t33Nbadg8XyYazDSpRLxHCdRxRPs8HJMpT9mgbGM@github.com/baloubet-technology/baloubet-auth-token.git'
-gem 'algoliasearch'
+gem 'algolia'
 
 group :development, :test do
   gem 'dotenv-rails'
