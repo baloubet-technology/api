@@ -56,7 +56,7 @@ module Mutations
           :crop => 'scale'
         )
 
-        client = Algolia::Search::Client.create(ENV['APPLICATION_ID'], ENV['API_KEY'])
+        client = Algolia::Search::Client.create('OQKR7DERMO', '0eedeab36e64fe27bb9aa0c4e1e6de58')
         product_algolia = client.init_index('products')
 
         product_algolia.save_objects([
